@@ -1,0 +1,38 @@
+{{ define "lineage/jobs-ownership.html" }}
+
+<div id="content">
+
+  <div class="row">
+    <div class="col-xs-12">
+      {{ template "lineage/tabs.html" . }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+    {{ with .JobWithNamespace.Job.Facets }}
+    {{ if .Ownership.Owners }}
+      <article>
+        <table role="grid">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{ range .Ownership.Owners }}
+            <tr>
+              <td>{{ .Name }}</td>
+              <td>{{ .Type }}</td>
+            </tr>
+            {{ end }}
+          </tbody>
+        </table>
+    </article>
+    {{ end }}
+    {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}

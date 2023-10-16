@@ -1,0 +1,106 @@
+{{ define "lineage/jobs-runs-events.html" }}
+
+{{ template "main/header.html"}}
+
+<div class="row">
+
+  <div class="col-xs-2">
+    {{ template "main/menu.html" . }}
+  </div>
+
+  <div class="col-xs-9">
+
+    <nav aria-label="breadcrumb">
+      <ul>
+        {{ with .Breadcrumbs }}
+        {{ range . }}
+        <li>
+          <a href="{{ .Href }}">{{ .Text }}</a>
+        </li>
+        {{ end }}
+        {{ end }}
+      </ul>
+    </nav>
+
+    <article>
+      {{ with .Run }}
+
+      <label for="status">Status
+        <input id="status" value="{{ .LastEventType }}" />
+      </label>
+
+      <label for="started">Started
+        <input id="started" value="{{ .StartedAt | formatTime }}" />
+      </label>
+
+      <label for="ended">Ended
+        <input id="ended" value="{{ .EndedAt | formatTime }}" />
+      </label>
+
+      {{ if .ErrorMessage }}
+      <label for="error-message">Error Message
+        <textarea id="error-message" value="{{ .ErrorMessage }}"></textarea>
+      </label>
+
+      <label for="programming-language">Programming Language
+        <input id="programming-language" value="{{ .ProgrammingLanguage }}" />
+      </label>
+
+      <label for="stacktrace">Stacktrace
+        <input id="stacktrace" value="{{ .Stacktrace }}" />
+      </label>
+      {{ end }}
+
+      {{ end }}
+    </article>
+
+    <article>
+      <header>Events</header>
+
+      {{ with .Events }}
+      <table role="grid">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Time</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range . }}
+          <tr>
+            <td>{{ .ID }}</td>
+            <td>{{ .EventTime | formatTime }}</td>
+            <td>{{ .EventType.String}}</td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+      {{ end }}
+    </article>
+
+    <article>
+      <header>Datasets</header>
+
+      {{ with .IODatasets }}
+      <table role="grid">
+        <thead>
+          <tr>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range . }}
+          <tr>
+            <td>{{ .DatasetVersion.Name }}</td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+      {{ end }}
+    </article>
+  </div>
+</div>
+
+{{ template "main/footer.html"}}
+{{ end }}

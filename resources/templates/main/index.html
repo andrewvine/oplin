@@ -1,0 +1,65 @@
+
+{{ define "main/index.html" }}
+
+{{ template "main/header.html"}}
+
+<h1 class="title is-1">{{ .Title }}</h1>
+<div class="columns">
+
+  <div class="column">
+    <table class="table is-bordered" id="table_1">
+      <thead>
+        <tr><th>Table 1</th></tr>
+      </thead>
+      <tbody>
+        <tr id="table_1.col_1"><td>column_1</td></tr>
+        <tr id="table_1.col_2"><td>column_2</td></tr>
+        <tr id="table_1.col_3"><td>column_3</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="column">
+    <table class="table is-bordered" id="table_2">
+      <thead>
+        <tr><th>Table 2</th></tr>
+      </thead>
+      <tbody>
+        <tr id="table_2.col_1"><td>column_1</td></tr>
+        <tr id="table_2.col_2"><td>column_2</td></tr>
+        <tr id="table_2.col_3"><td>column_3</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="column">
+    <table class="table is-bordered" id="table_2">
+      <thead>
+        <tr><th>Table 3</th></tr>
+      </thead>
+      <tbody>
+        <tr id="table_3.col_1"><td>column_1</td></tr>
+        <tr id="table_3.col_2"><td>column_2</td></tr>
+        <tr id="table_3.col_3"><td>column_3</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<script>
+  function connect(a, b){
+    new LeaderLine(
+      LeaderLine.mouseHoverAnchor(document.getElementById(a)),
+      document.getElementById(b)
+    );
+  }
+  connect('table_1.col_1', 'table_2.col_2');
+  connect('table_1.col_1', 'table_2.col_3');
+  connect('table_1.col_3', 'table_2.col_1');
+  connect('table_2.col_1', 'table_3.col_1');
+  connect('table_2.col_3', 'table_3.col_2');
+</script>
+
+{{ template "main/footer.html"}}
+
+{{ end }}

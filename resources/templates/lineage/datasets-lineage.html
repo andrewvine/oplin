@@ -1,0 +1,124 @@
+{{ define "lineage/datasets-lineage.html" }}
+
+<div id="content">
+  <div class="row">
+    <div class="col-xs-12">
+  {{ template "lineage/tabs.html" . }}
+</div>
+</div>
+
+<div class="row">
+
+  <div class="col-xs-12">
+
+    <div class="row">
+
+      <div class="col-xs-4">
+          <label class="label">Version
+              {{ $dvID := .VersionID }}
+              {{ with .Versions }}
+              <select name="version" hx-get="/lineage/datasets/versions/lineage" hx-target="#content">
+                {{ range . }}
+                <option value="{{ .ID }}" {{ if eq .ID $dvID }} selected="selected" {{ end }}>{{ .CreatedAt | formatTime
+                  }} </option>
+                {{ end }}
+              </select>
+              {{ end }}
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-xs-4">
+
+          <article class="dataset">
+          {{ with .InputTables }}
+          {{ range . }}
+          <table role="grid">
+            <thead>
+              <tr>
+                <th scope="col">{{ .Name }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ with .Fields }}
+              {{ range . }}
+              <tr id="{{.ID }}">
+                <td>{{ .Name }}</td>
+              </tr>
+              {{ end }}
+              {{ end }}
+            </tbody>
+          </table>
+          {{ end }}
+          {{ end }}
+        </article>
+
+
+        </div>
+
+        <div class="col-xs-2">
+        </div>
+
+        <div class="col-xs-4">
+
+          <article class="dataset">
+          {{ with .OutputTables }}
+          {{ range . }}
+          <table>
+            <thead>
+              <tr>
+                <th>{{ .Name }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ with .Fields }}
+              {{ range . }}
+              <tr id="{{ .ID }}">
+                <td>{{ .Name }}</td>
+              </tr>
+              {{ end }}
+              {{ end }}
+            </tbody>
+          </table>
+          {{ end }}
+          {{ end }}
+        </article>
+
+        </div>
+      </div>
+
+      <script>
+        if (window.Lines === undefined) {
+          window.Lines = [];
+        }
+        if (!window.hasOwnProperty('Lines')) {
+          window.Lines = [];
+        }
+        for (let i = 0; i < window.Lines.length; i++) {
+          window.Lines[i].remove();
+        }
+        window.Lines = [];
+
+        $(document).ready(function () {
+          {{ with .Lines }}
+          {{ range. }}
+
+          line = new LeaderLine(
+            document.getElementById('{{ .Input }}'),
+            document.getElementById('{{ .Output }}')
+          );
+          window.Lines.push(line);
+
+          {{ end }} 
+          {{ end }}
+
+        });
+      </script>
+    </div>
+  </div>
+</div>
+</div>
+
+{{ end }}

@@ -1,0 +1,14 @@
+drop table if exists lineage.requests;
+drop table if exists lineage.lifecycle_state_changes;
+drop table if exists lineage.fields;
+drop table if exists lineage.column_lineages;
+drop table if exists lineage.run_dataset_versions;
+drop table if exists lineage.dataset_versions;
+drop table if exists lineage.datasets;
+drop table if exists lineage.dataset_namespaces;
+drop table if exists lineage.run_events;
+drop table if exists lineage.runs;
+drop table if exists lineage.job_versions;
+drop table if exists lineage.jobs;
+drop table if exists lineage.job_namespaces;
+drop schema if exists lineage;

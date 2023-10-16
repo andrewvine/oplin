@@ -1,0 +1,51 @@
+{{ define "lineage/jobs-runs.html" }}
+
+<div id="content">
+
+  <div class="row">
+    <div class="col-xs-12">
+      {{ template "lineage/tabs.html" . }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <article>
+      {{ with .JobWithNamespace.Job.Facets }}
+        <label for="desc">Description
+          <textarea id="desc" value="{{ .Documentation.Description }}"></textarea>
+        </label>
+      {{ end }}
+
+      {{ with .Runs }}
+        <table id="runs" role="grid">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Started</th>
+              <th>Ended</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{ range . }}
+            <tr>
+              <td><a href="/lineage/runs/{{ .ID }}">{{ .ID }}</a></td>
+              <td>{{ .StartedAt | formatTime }}</td>
+              <td>{{ .EndedAt | formatTime }}</td>
+              <td>{{ .LastEventType.String}}</td>
+            </tr>
+            {{ end }}
+          </tbody>
+        </table>
+      {{ end }}
+        <script>
+          $(document).ready(function () {
+            $('#runs').DataTable({ info: false, lengthChange: false, pageLength: 25, language: { search: "" }, });
+          });
+        </script>
+      </article>
+    </div>
+  </div>
+</div>
+{{ end }}

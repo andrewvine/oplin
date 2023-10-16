@@ -1,0 +1,47 @@
+{{ define "lineage/requests-list.html" }}
+
+{{ template "main/header.html"}}
+
+<div class="row">
+
+  <div class="col-xs-2">
+    {{ template "main/menu.html" . }}
+  </div>
+
+  <div class="col-xs-9">
+
+    <h1 class="title is-1">Events</h1>
+    <div>
+      {{ with .Requests }}
+      <table id="requests" role="grid">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Payload</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range . }}
+          <tr>
+            <td>{{ .ID }}</td>
+            <td><textarea class="pretty-print-json">{{ .Payload | bytesToString }}</textarea></td>
+            <td>{{ .CreatedAt | formatTime }}</td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+      {{ end }}
+      <script>
+        $(document).ready(function () {
+          $('#requests').DataTable({ info: false, lengthChange: false, pageLength: 25, language: { search: "" }, });
+          $('textarea').each(function(idx, ele){
+            $(ele).val(JSON.stringify(JSON.parse($(ele).val()),null,2))});
+        });
+      </script>
+    </div>
+
+  </div>
+  <div class="col-xs-1"></div>
+  {{ template "main/footer.html"}}
+  {{ end }}

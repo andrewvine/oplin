@@ -1,0 +1,45 @@
+{{ define "lineage/jobs-list.html" }}
+
+{{ template "main/header.html"}}
+
+<div class="row">
+
+  <div class="col-xs-2">
+  {{ template "main/menu.html" . }}
+
+  </div>
+
+  <div class="col-xs-9">
+
+<h1 class="title is-1">{{ .Title }}</h1>
+<div>
+  {{ with .Jobs }}
+  <table id="jobs" role="grid">
+    <thead>
+      <tr>
+        <th>Job</th>
+        <th>Namespace</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{ range . }}
+      <tr>
+        <td><a href="/lineage/jobs/{{ .Job.ID }}">{{ .Job.Name }}</a></td>
+        <td><a href="/lineage/jobs-namespaces/{{ .JobNamespace.ID }}">{{ .JobNamespace.Name }}</td>
+        <td>{{ .Job.CreatedAt | formatTime }}</td>
+      </tr>
+    {{ end }}
+    </tbody>
+  </table>
+  {{ end }}
+  <script>
+  $(document).ready(function () {
+      $('#jobs').DataTable({ info: false, lengthChange: false, pageLength: 25, language: { search: "" }, });
+  });
+  </script>
+</div>
+<div>
+</div>
+{{ template "main/footer.html"}}
+{{ end }}

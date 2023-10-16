@@ -1,0 +1,77 @@
+{{ define "lineage/jobs-sourcecode.html" }}
+
+<div id="content">
+
+  <div class="row">
+    <div class="col-xs-12">
+      {{ template "lineage/tabs.html" . }}
+    </div>
+  </div>
+
+  <div class="row">
+    {{ with .JobWithNamespace.Job.Facets }}
+
+    <div class="col-xs-12">
+      {{ with .SourceCodeLocation }}
+      <article>
+
+        <header>Location</header>
+
+        <label for="type">Type
+          <input id="type" value="{{ .Type }}" />
+        </label>
+
+        <label for="url">URL
+          <input id="url" value="{{ .URL }}" />
+        </label>
+
+        <label for="repo-url">Repo URL
+          <input id="repo-url" value="{{ .RepoURL }}" />
+        </label>
+
+        <label for="path">Path
+          <input id="path" value="{{ .Path }}" />
+        </label>
+
+        <label for="version">Version
+          <input id="version" value="{{ .Version }}" />
+        </label>
+
+        <label for="tag">Tag
+          <input id="tag" value="{{ .Tag }}" />
+        </label>
+      </article>
+      {{ end }}
+
+      {{ with .SQLJob }}
+      {{ if .Query }}
+      <article>
+        <header>SQL Query</header>
+
+        <label for="query">Query
+          <textarea id="query" value="{{ .Query }}"></textarea>
+        </label>
+      </article>
+      {{ end }}
+      {{ end }}
+
+      {{ with .SourceCode }}
+      {{ if .SourceCode }}
+      <article>
+        <header>Source Code</header>
+
+        <label for="language">Language
+          <input id="language" value="{{ .Language }}" />
+        </label>
+
+        <label for="code">Code
+          <textarea id="code" value="{{ .SourceCode }}"></textarea>
+        </label>
+      </article>
+      {{ end }}
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

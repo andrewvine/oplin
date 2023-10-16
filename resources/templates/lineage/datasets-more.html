@@ -1,0 +1,91 @@
+{{ define "lineage/datasets-more.html" }}
+
+<div id="content">
+
+  <div class="row">
+    <div class="col-xs-12">
+      {{ template "lineage/tabs.html" . }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      {{ with .DatasetWithNamespace }}
+
+      <article>
+
+        <header>Data Source </header>
+
+        <label for="name">Name
+          <input id="name" value="{{ .Dataset.Facets.Datasource.Name }}" />
+        </label>
+
+        <label for="url">URL
+          <input id="url" value="{{ .Dataset.Facets.Datasource.URL }}" />
+        </label>
+
+      </article>
+
+      <article>
+
+        <header>Storage</header>
+
+        <label for="storage-layer">Storage Layer
+          <input id="storage-layer" value="{{ .Dataset.Facets.Storage.StorageLayer }}" />
+        </label>
+
+        <label for="file-format">File Format
+          <input id="file-format" value="{{ .Dataset.Facets.Storage.FileFormat }}" />
+        </label>
+
+      </article>
+
+      <article>
+
+        <header>Symlinks</header>
+
+          {{ with .Dataset.Facets.Symlinks.Identifiers }}
+          <table role="grid">
+            <thead>
+              <tr>
+                <th>Namespace</th>
+                <th>Name</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ range . }}
+              <tr>
+                <td>{{ .Namespace }}</td>
+                <td>{{ .Name }}</td>
+                <td>{{ .Type }}</td>
+              </tr>
+              {{ end }}
+            </tbody>
+          </table>
+          {{ end }}
+
+      </article>
+
+      <script>
+
+        if (window.Lines === undefined) {
+          window.Lines = [];
+        }
+        if (!window.hasOwnProperty('Lines')) {
+          window.Lines = [];
+        }
+        for (let i = 0; i < window.Lines.length; i++) {
+          window.Lines[i].remove();
+        }
+        window.Lines = [];
+
+      </script>
+
+      {{ end }}
+
+    </div>
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,59 @@
+{{ define "lineage/datasets-quality.html" }}
+
+<div id="content">
+
+  <div class="row">
+    <div class="col-xs-12">
+      {{ template "lineage/tabs.html" . }}
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-xs-12">
+
+      <article>
+        {{ with .DatasetWithNamespace.Dataset.Facets.DataQualityAssertions.Assertions }}
+        <table role="grid">
+          <thead>
+            <tr>
+              <th>Assertion</th>
+              <th>Column</th>
+              <th>Success</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{ range . }}
+            <tr>
+              <td>{{ .Assertion }}</td>
+              <td>{{ .Column }}</td>
+              <td>{{ .Success }}</td>
+            </tr>
+            {{ end }}
+          </tbody>
+        </table>
+        {{ end }}
+
+        <script>
+
+          if (window.Lines === undefined) {
+            window.Lines = [];
+          }
+          if (!window.hasOwnProperty('Lines')) {
+            window.Lines = [];
+          }
+          for (let i = 0; i < window.Lines.length; i++) {
+            window.Lines[i].remove();
+          }
+          window.Lines = [];
+
+        </script>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</div>
+{{ end }}

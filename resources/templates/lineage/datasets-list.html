@@ -1,0 +1,43 @@
+{{ define "lineage/datasets-list.html" }}
+
+{{ template "main/header.html"}}
+
+<div class="row">
+  <div class="col-xs-2">
+    {{ template "main/menu.html" . }}
+  </div>
+
+  <div class="col-xs-9">
+    <h1 class="title is-1">{{ .Title }}</h1>
+    <div>
+      {{ with .Datasets }}
+      <table id="datasets" role="grid">
+        <thead>
+          <tr>
+            <th scope="col">Dataset</th>
+            <th scope="col">Namespace</th>
+            <th scope="col">Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range . }}
+          <tr>
+            <td><a href="/lineage/datasets/{{ .Dataset.ID }}">{{ .Dataset.Name }}</a></td>
+            <td><a href="/lineage/dataset-namespaces/{{ .DatasetNamespace.ID }}">{{ .DatasetNamespace.Name }}</td>
+            <td>{{ .Dataset.CreatedAt | formatTime }}</td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+      {{ end }}
+      <script>
+        $(document).ready(function () {
+          $('#datasets').DataTable({ info: false, lengthChange: false, pageLength: 25, language: { search: "" },});
+        });
+      </script>
+    </div>
+
+  </div>
+  <div class="col-xs-1"></div>
+  {{ template "main/footer.html"}}
+  {{ end }}

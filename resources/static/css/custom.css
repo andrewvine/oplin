@@ -1,0 +1,30 @@
+h1,
+h2 {
+  --typography-spacing-vertical: 0;
+}
+
+.menu span i {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.dataTables_filter {
+  float: right;
+}
+
+.dataTables_paginate a {
+  margin-right: 10px;
+}
+
+#tabs nav {
+  float: right;
+}
+
+article.dataset {
+  padding: 2px;
+}
+
+textarea.pretty-print-json { 
+  font-size: 10px; 
+  font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
+}
