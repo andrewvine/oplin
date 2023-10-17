@@ -1,1 +1,1 @@
-export OPLIN_PATH=`pwd`
+export OPLIN_PROJECT_PATH=`pwd`

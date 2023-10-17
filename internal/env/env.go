@@ -13,7 +13,7 @@ func Setup() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Println("No .env file found")
-		if os.Getenv("DB_HOST") == "" {
+		if os.Getenv("OPLIN_DB_HOST") == "" {
 			log.Println("No environment variables like DB_HOST found")
 		}
 	}
@@ -30,11 +30,11 @@ func getEnv(k, v string) string {
 
 func BuildDSN(host, user, dbname, password string, port int) string {
 	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s",
-		getEnv("DB_HOST", host),
-		getEnv("DB_USER", user),
-		getEnv("DB_PASSWORD", password),
-		getEnv("DB_NAME", dbname),
-		getEnv("DB_PORT", strconv.Itoa(port)))
+		getEnv("OPLIN_DB_HOST", host),
+		getEnv("OPLIN_DB_USER", user),
+		getEnv("OPLIN_DB_PASSWORD", password),
+		getEnv("OPLIN_DB_NAME", dbname),
+		getEnv("OPLIN_DB_PORT", strconv.Itoa(port)))
 }
 
 func GetTestDSN() string {
@@ -42,9 +42,9 @@ func GetTestDSN() string {
 }
 
 func PrependProjectPath(s string) string {
-	path := os.Getenv("OPLIN_PATH")
+	path := os.Getenv("OPLIN_PROJECT_PATH")
 	if path == "" {
-		log.Fatal("OPLIN_PATH not set")
+		log.Fatal("OPLIN_PROJECT_PATH not set")
 	}
 	return fmt.Sprintf("%s/%s", path, s)
 }
