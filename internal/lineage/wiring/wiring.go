@@ -56,11 +56,11 @@ func buildDSN() string {
 	}
 
 	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s",
-		firstSet(dbHost, os.Getenv("DB_HOST"), "localhost"),
-		firstSet(dbUser, os.Getenv("DB_USER"), "oplin"),
-		firstSet(dbPassword, os.Getenv("DB_PASSWORD"), "topsecret"),
-		firstSet(dbName, os.Getenv("DB_NAME"), "oplin"),
-		firstSet(portString, os.Getenv("DB_PORT"), "5432"))
+		firstSet(dbHost, os.Getenv("OPLIN_DB_HOST"), "localhost"),
+		firstSet(dbUser, os.Getenv("OPLIN_DB_USER"), "oplin"),
+		firstSet(dbPassword, os.Getenv("OPLIN_DB_PASSWORD"), "topsecret"),
+		firstSet(dbName, os.Getenv("OPLIN_DB_NAME"), "oplin"),
+		firstSet(portString, os.Getenv("OPLIN_DB_PORT"), "5432"))
 }
 
 func NewGinEngine() *gin.Engine {

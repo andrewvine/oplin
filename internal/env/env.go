@@ -13,9 +13,6 @@ func Setup() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Println("No .env file found")
-		if os.Getenv("OPLIN_DB_HOST") == "" {
-			log.Println("No environment variables like DB_HOST found")
-		}
 	}
 }
 

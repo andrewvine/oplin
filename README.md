@@ -16,9 +16,9 @@ ALTER DATABASE oplin OWNER TO oplin;
 2. Setup the environment variables (replacing the defaults with your own as needed):
 
 ```
-export OPLIN_DB_HOST = localhost;
-export OPLIN_DB_USER = oplin; 
-export OPLIN_DB_PASSWORD = {password};
-export OPLIN_DB_NAME = oplin;
-export OPLIN_DB_PORT = 5432;
+export OPLIN_DB_HOST=localhost
+export OPLIN_DB_USER=oplin 
+export OPLIN_DB_PASSWORD=topsecret
+export OPLIN_DB_NAME=oplin
+export OPLIN_DB_PORT=5432
 ```

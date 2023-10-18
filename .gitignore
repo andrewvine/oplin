@@ -22,3 +22,6 @@ build/
 
 # Go workspace file
 go.work
+
+# Todo file
+TODO.txt
