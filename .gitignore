@@ -25,3 +25,5 @@ go.work
 
 # Todo file
 TODO.txt
+
+dist/
