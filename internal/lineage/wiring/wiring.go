@@ -38,7 +38,7 @@ func init() {
 	flag.StringVar(&dbName, "db_name", "", "the name of the database")
 	flag.StringVar(&dbUser, "db_user", "", "the name of the user")
 	flag.StringVar(&dbPassword, "db_password", "", "the database users password")
-	flag.StringVar(&dbSslmode, "db_sslmode", "disable", "the sslmode (prefer)")
+	flag.StringVar(&dbSslmode, "db_sslmode", "", "the sslmode (disable)")
 	flag.IntVar(&dbPort, "db_port", 0, "the database port")
 }
 
@@ -63,7 +63,7 @@ func buildDSN() string {
 		firstSet(dbPassword, os.Getenv("OPLIN_DB_PASSWORD"), "topsecret"),
 		firstSet(dbName, os.Getenv("OPLIN_DB_NAME"), "oplin"),
 		firstSet(portString, os.Getenv("OPLIN_DB_PORT"), "5432"),
-		firstSet(dbSslmode, os.Getenv("OPLIN_DB_SSLMODE"), "prefer"))
+		firstSet(dbSslmode, os.Getenv("OPLIN_DB_SSLMODE"), "disable"))
 }
 
 func NewGinEngine() *gin.Engine {
