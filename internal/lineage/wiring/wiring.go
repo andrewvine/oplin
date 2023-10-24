@@ -30,6 +30,7 @@ var dbHost string
 var dbName string
 var dbUser string
 var dbPassword string
+var dbSslmode string
 var dbPort int
 
 func init() {
@@ -37,6 +38,7 @@ func init() {
 	flag.StringVar(&dbName, "db_name", "", "the name of the database")
 	flag.StringVar(&dbUser, "db_user", "", "the name of the user")
 	flag.StringVar(&dbPassword, "db_password", "", "the database users password")
+	flag.StringVar(&dbSslmode, "db_sslmode", "disable", "the sslmode (prefer)")
 	flag.IntVar(&dbPort, "db_port", 0, "the database port")
 }
 
@@ -55,12 +57,13 @@ func buildDSN() string {
 		portString = strconv.Itoa(dbPort)
 	}
 
-	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s",
+	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
 		firstSet(dbHost, os.Getenv("OPLIN_DB_HOST"), "localhost"),
 		firstSet(dbUser, os.Getenv("OPLIN_DB_USER"), "oplin"),
 		firstSet(dbPassword, os.Getenv("OPLIN_DB_PASSWORD"), "topsecret"),
 		firstSet(dbName, os.Getenv("OPLIN_DB_NAME"), "oplin"),
-		firstSet(portString, os.Getenv("OPLIN_DB_PORT"), "5432"))
+		firstSet(portString, os.Getenv("OPLIN_DB_PORT"), "5432"),
+		firstSet(dbSslmode, os.Getenv("OPLIN_DB_SSLMODE"), "prefer"))
 }
 
 func NewGinEngine() *gin.Engine {
