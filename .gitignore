@@ -20,6 +20,10 @@
 # Build folder
 build/
 
+# venv
+.ve/
+.venv/
+
 # Go workspace file
 go.work
 
