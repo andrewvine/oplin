@@ -1,0 +1,3 @@
+CREATE DATABASE oplin;
+CREATE USER oplin WITH PASSWORD 'topsecret';
+ALTER DATABASE oplin OWNER TO oplin; 
