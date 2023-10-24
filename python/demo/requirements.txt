@@ -1,1 +1,2 @@
 openlineage-python
+numpy
