@@ -13,3 +13,12 @@ services:
       - 5433:5432
     environment:
       POSTGRES_PASSWORD: example
+
+  app:
+    image: golang
+    volumes: 
+      - .:/app
+    ports:
+      - 8080:8080
+    working_dir: /app
+    command: go run cmd/oplin/main.go -db_host db 
