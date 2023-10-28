@@ -2,7 +2,9 @@
 
 Oplin is a simple service for collecting and viewing Metadata. It is similar to (but not as feature rich) as [Marquez](https://github.com/MarquezProject/marquez]). Like Marquez it implements the [OpenLineage](https://openlineage.io/) specification.
 
-## Docker
+## Get Started
+
+### Docker
 
 1. Clone the repository:
 
@@ -22,8 +24,7 @@ docker compose up
 docker compose run app make test
 ```
 
-## Installation
-
+### Release Installation
 
 1. Download and unpack the latest [release](https://github.com/andrewvine/oplin/releases):
 
