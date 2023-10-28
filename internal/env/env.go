@@ -3,6 +3,7 @@ package env
 import (
 	"fmt"
 	"log"
+	"oplin/internal/projectpath"
 	"os"
 	"strconv"
 
@@ -10,7 +11,7 @@ import (
 )
 
 func Setup() {
-	err := godotenv.Load()
+	err := godotenv.Load(fmt.Sprintf("%s/.env", projectpath.Root))
 	if err != nil {
 		log.Println("No .env file found")
 	}

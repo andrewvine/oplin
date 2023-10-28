@@ -5,15 +5,15 @@ build:
 	GOARCH=amd64 GOOS=linux go build -o build/${BINARY_NAME}-linux cmd/oplin/main.go
 	GOARCH=amd64 GOOS=windows go build -o build/${BINARY_NAME}-windows cmd/oplin/main.go
 
-run: build
-	./${BINARY_NAME}
-
 clean:
 	go clean
 	rm -rf build
 
 test:
 	go test ./...
+
+run:
+	go run cmd/oplin/main.go
 
 test_coverage:
 	go test ./... -coverprofile=coverage.out

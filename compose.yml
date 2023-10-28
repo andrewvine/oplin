@@ -20,5 +20,9 @@ services:
       - .:/app
     ports:
       - 8080:8080
+    depends_on:
+      - db
     working_dir: /app
+    environment:
+      OPLIN_TEST_DB_HOST: db
     command: go run cmd/oplin/main.go -db_host db 
