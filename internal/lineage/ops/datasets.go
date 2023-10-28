@@ -1,11 +1,11 @@
 package ops
 
 import (
+	"context"
+	"encoding/json"
 	"oplin/internal/lineage"
 	"oplin/internal/lineage/db"
 	ol "oplin/internal/openlineage"
-	"context"
-	"encoding/json"
 
 	"github.com/rotisserie/eris"
 )

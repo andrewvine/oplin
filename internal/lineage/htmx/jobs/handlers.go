@@ -1,27 +1,27 @@
 package jobs
 
 import (
-	"oplin/internal/lineage/htmx"
-	"oplin/internal/lineage/ops"
 	"context"
 	"fmt"
 	"net/http"
+	"oplin/internal/lineage/htmx"
+	"oplin/internal/lineage/ops"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 type TabItem struct {
-	Key   string
-	Text  string
-	Href  string
-	Role  string
-	Icon  string
+	Key  string
+	Text string
+	Href string
+	Role string
+	Icon string
 }
 
 type Breadcrumb struct {
-	Text  string
-	Href  string
+	Text string
+	Href string
 }
 
 var TabItems = []TabItem{

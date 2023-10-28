@@ -1,10 +1,10 @@
 package openlineage
 
 import (
-	"oplin/internal/lineage/db"
-	"oplin/internal/utils"
 	"context"
 	"encoding/json"
+	"oplin/internal/lineage/db"
+	"oplin/internal/utils"
 
 	"github.com/rotisserie/eris"
 )

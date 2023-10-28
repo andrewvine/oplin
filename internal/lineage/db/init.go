@@ -1,9 +1,9 @@
 package db
 
 import (
-	"oplin/internal/utils"
 	"context"
 	"database/sql"
+	"oplin/internal/utils"
 	"strings"
 
 	"github.com/rotisserie/eris"

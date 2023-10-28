@@ -1,13 +1,13 @@
 package openlineage
 
 import (
+	"bytes"
+	"context"
+	"encoding/json"
 	"oplin/internal/lineage"
 	"oplin/internal/lineage/db"
 	"oplin/internal/openlineage"
 	"oplin/internal/utils"
-	"bytes"
-	"context"
-	"encoding/json"
 	"sort"
 
 	"github.com/rotisserie/eris"

@@ -1,14 +1,14 @@
 package openlineage_test
 
 import (
+	"context"
+	"fmt"
+	"log"
 	"oplin/internal/lineage"
 	ops "oplin/internal/lineage/ops"
 	ol_ops "oplin/internal/lineage/ops/openlineage"
 	"oplin/internal/openlineage"
 	"oplin/internal/utils"
-	"context"
-	"fmt"
-	"log"
 	"testing"
 	"time"
 

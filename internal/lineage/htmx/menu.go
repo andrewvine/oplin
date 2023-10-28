@@ -1,11 +1,11 @@
 package htmx
 
 type MenuItem struct {
-	Key   string
-	Text  string
-	Href  string
+	Key  string
+	Text string
+	Href string
 	Role string
-	Icon  string
+	Icon string
 }
 
 var MenuItems = []MenuItem{

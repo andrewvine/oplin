@@ -19,7 +19,6 @@ import (
 func setupSuite(tb testing.TB) (*gin.Engine, func(tb testing.TB)) {
 	ctx := context.Background()
 	db := utils.GetTestDB()
-	
 
 	deps := api.TestDeps{DB: db}
 	r := wiring.NewGinEngine()

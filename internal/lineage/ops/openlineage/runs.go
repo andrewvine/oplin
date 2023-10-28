@@ -1,12 +1,12 @@
 package openlineage
 
 import (
+	"context"
+	"encoding/json"
 	"oplin/internal/lineage"
 	"oplin/internal/lineage/db"
 	"oplin/internal/openlineage"
 	"oplin/internal/utils"
-	"context"
-	"encoding/json"
 	"time"
 
 	"github.com/google/uuid"

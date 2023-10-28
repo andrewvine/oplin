@@ -1,13 +1,13 @@
 package datasets
 
 import (
+	"context"
+	"fmt"
+	"net/http"
 	"oplin/internal/lineage"
 	"oplin/internal/lineage/htmx"
 	"oplin/internal/lineage/ops"
 	"oplin/internal/openlineage"
-	"context"
-	"fmt"
-	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -40,11 +40,11 @@ type Line struct {
 }
 
 type TabItem struct {
-	Key   string
-	Text  string
-	Href  string
-	Role  string
-	Icon  string
+	Key  string
+	Text string
+	Href string
+	Role string
+	Icon string
 }
 
 type Breadcrumb struct {

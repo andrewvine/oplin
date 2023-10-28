@@ -1,9 +1,9 @@
 package lineage
 
 import (
-	"oplin/internal/openlineage"
 	"errors"
 	"fmt"
+	"oplin/internal/openlineage"
 	"strings"
 	"time"
 )
