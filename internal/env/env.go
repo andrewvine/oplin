@@ -37,11 +37,3 @@ func BuildDSN(host, user, dbname, password string, port int) string {
 func GetTestDSN() string {
 	return ""
 }
-
-func PrependProjectPath(s string) string {
-	path := os.Getenv("OPLIN_PROJECT_PATH")
-	if path == "" {
-		log.Fatal("OPLIN_PROJECT_PATH not set")
-	}
-	return fmt.Sprintf("%s/%s", path, s)
-}

@@ -1,12 +1,14 @@
 package api_test
 
 import (
-	"oplin/internal/env"
-	"oplin/internal/lineage/wiring"
-	"oplin/internal/utils"
+	"context"
 	"log"
 	"net/http"
 	"net/http/httptest"
+	"oplin/internal/lineage/api"
+	"oplin/internal/lineage/ops"
+	"oplin/internal/lineage/wiring"
+	"oplin/internal/utils"
 	"strings"
 	"testing"
 
@@ -15,15 +17,14 @@ import (
 )
 
 func setupSuite(tb testing.TB) (*gin.Engine, func(tb testing.TB)) {
+	ctx := context.Background()
 	db := utils.GetTestDB()
-	filename := env.PrependProjectPath("internal/lineage/db/schema.sql")
-	err := utils.RunSQLFile(db, filename)
-	if err != nil {
-		log.Fatalf("Cannot load schema[%v]", err)
-	}
+	
 
+	deps := api.TestDeps{DB: db}
 	r := wiring.NewGinEngine()
-	err = wiring.SetupTestLineage(r)
+	err := ops.InitializeTestDB(ctx, &deps)
+	wiring.SetupRouter(r, &deps)
 	if err != nil {
 		log.Fatalf("Cannot setup controller[%v]", err)
 	}

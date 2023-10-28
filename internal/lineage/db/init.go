@@ -33,3 +33,17 @@ func InitializeDB(ctx context.Context, db *sql.DB) error {
 	}
 	return nil
 }
+
+func InitializeTestDB(ctx context.Context, db *sql.DB) error {
+	stmts := strings.Split(DropSQL, ";")
+	err := utils.RunStatements(db, stmts)
+	if err != nil {
+		return eris.Wrap(err, "Failed to initialize db")
+	}
+	stmts = strings.Split(SchemaSQL, ";")
+	err = utils.RunStatements(db, stmts)
+	if err != nil {
+		return eris.Wrap(err, "Failed to initialize db")
+	}
+	return nil
+}

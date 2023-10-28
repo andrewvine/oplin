@@ -110,7 +110,7 @@ func setupLineage(r *gin.Engine, dsn string) error {
 	if err != nil {
 		return err
 	}
-	deps := &Deps{DB: DB}
+	deps := &WiringDeps{DB: DB}
 
 	// Initialize the schema if it does not exist
 	ctx := context.Background()
@@ -124,7 +124,7 @@ func setupLineage(r *gin.Engine, dsn string) error {
 }
 
 func SetupRouter(r *gin.Engine,
-	deps *Deps,
+	deps Deps,
 ) {
 	// API
 	r.POST("/api/v1/lineage", api.MakeCreateWithOpenLineageRunEvent(deps))

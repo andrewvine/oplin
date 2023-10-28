@@ -1,7 +1,6 @@
 package openlineage_test
 
 import (
-	"oplin/internal/env"
 	"oplin/internal/lineage"
 	ops "oplin/internal/lineage/ops"
 	ol_ops "oplin/internal/lineage/ops/openlineage"
@@ -18,15 +17,15 @@ import (
 )
 
 func setupSuite(tb testing.TB) (*ops.TestDeps, func(tb testing.TB)) {
+	ctx := context.Background()
 	db := utils.GetTestDB()
-	deps := ops.TestDeps{DB: db}
+	deps := &ops.TestDeps{DB: db}
 
-	filename := env.PrependProjectPath("internal/lineage/db/schema.sql")
-	err := utils.RunSQLFile(deps.DB, filename)
+	err := ops.InitializeTestDB(ctx, deps)
 	if err != nil {
-		log.Fatalf("Cannot load schema[%v]", err)
+		log.Fatalf("Cannot setup controller[%v]", err)
 	}
-	return &deps, func(tb testing.TB) {
+	return deps, func(tb testing.TB) {
 	}
 }
 

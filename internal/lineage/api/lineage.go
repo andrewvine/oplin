@@ -36,7 +36,7 @@ func MakeCreateWithOpenLineageRunEvent(deps Deps) gin.HandlerFunc {
 		ev := openlineage.NewRunEvent()
 
 		body, _ := ioutil.ReadAll(c.Request.Body)
-		fmt.Printf("{s}", string(body))
+		fmt.Print(string(body))
 		c.Request.Body = ioutil.NopCloser(bytes.NewReader(body))
 
 		if err := c.BindJSON(&ev); err != nil {
