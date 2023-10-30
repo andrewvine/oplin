@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// ToPQRawMessageType converts a json.RawMessage to a pqtype.NullRawMessage
 func ToPQRawMessageType(r json.RawMessage) pqtype.NullRawMessage {
 	if r == nil || len(r) == 0 {
 		return pqtype.NullRawMessage{Valid: false}
@@ -14,10 +15,12 @@ func ToPQRawMessageType(r json.RawMessage) pqtype.NullRawMessage {
 	return pqtype.NullRawMessage{Valid: true, RawMessage: r}
 }
 
+// NullString returns a sql.NullString with the given string
 func NullString(s string) sql.NullString {
 	return sql.NullString{String: s, Valid: true}
 }
 
+// NullInt64 returns a sql.NullInt64 with the given int64
 func NullInt64(i *int64) sql.NullInt64 {
 	if i == nil {
 		return sql.NullInt64{Valid: false}
@@ -25,6 +28,7 @@ func NullInt64(i *int64) sql.NullInt64 {
 	return sql.NullInt64{Int64: *i, Valid: true}
 }
 
+// NullTime returns a sql.NullTime with the given time.Time
 func NullTime(t time.Time) sql.NullTime {
 	if t.IsZero() {
 		return sql.NullTime{Valid: false}
@@ -32,18 +36,22 @@ func NullTime(t time.Time) sql.NullTime {
 	return sql.NullTime{Time: t, Valid: true}
 }
 
+// NowUTC returns the current time in UTC
 func NowUTC() time.Time {
 	return time.Now().UTC()
 }
 
+// NowUTCAsNullTime returns the current time in UTC as a sql.NullTime
 func NowUTCAsNullTime() sql.NullTime {
 	return sql.NullTime{Time: NowUTC(), Valid: true}
 }
 
+// IsNoRowsError returns true if the error is a sql.ErrNoRows
 func IsNoRowsError(err error) bool {
 	return err == sql.ErrNoRows
 }
 
+// MergeFacets merges two json.RawMessages into one
 func MergeFacets(a, b []byte) ([]byte, error) {
 	var mapA map[string]interface{}
 	if len(a) > 0 {

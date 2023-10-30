@@ -10,6 +10,8 @@ import (
 	_ "github.com/lib/pq"
 )
 
+
+// getEnv returns the value of an environment variable or a default value
 func getEnv(k, v string) string {
 	s := os.Getenv(k)
 	if s == "" {
@@ -19,6 +21,7 @@ func getEnv(k, v string) string {
 
 }
 
+// buildDSN builds a DSN string from environment variables
 func buildDSN(host, user, dbname, password string, port int, sslmode string) string {
 	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
 		getEnv("OPLIN_TEST_DB_HOST", host),
@@ -29,6 +32,7 @@ func buildDSN(host, user, dbname, password string, port int, sslmode string) str
 		getEnv("OPLIN_TEST_DB_SSLMODE", sslmode))
 }
 
+// GetTestDB returns a connection to the test database
 func GetTestDB() *sql.DB {
 	dsn := buildDSN("localhost", "test_oplin", "test_oplin", "topsecret", 5432, "disable")
 	DB, err := sql.Open("postgres", dsn)
