@@ -1,6 +1,6 @@
 # Oplin
 
-Oplin is a simple service for collecting and viewing Metadata. It is similar to (but not as feature rich) as [Marquez](https://github.com/MarquezProject/marquez]). Like Marquez it implements the [OpenLineage](https://openlineage.io/) specification.
+Oplin is a simple service for collecting and viewing Metadata. It is similar to (but not as feature rich) as [Marquez](https://github.com/MarquezProject/marquez). Like Marquez it implements the [OpenLineage](https://openlineage.io/) specification.
 
 ## Get Started
 
