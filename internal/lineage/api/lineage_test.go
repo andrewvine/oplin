@@ -21,8 +21,11 @@ func setupSuite(tb testing.TB) (*gin.Engine, func(tb testing.TB)) {
 	db := utils.GetTestDB()
 
 	deps := api.TestDeps{DB: db}
-	r := wiring.NewGinEngine()
 	err := ops.InitializeTestDB(ctx, &deps)
+	if err != nil {
+		log.Fatalf("Failed to initialize test db[%v]", err)
+	}
+	r := wiring.NewGinEngine()
 	wiring.SetupRouter(r, &deps)
 	if err != nil {
 		log.Fatalf("Cannot setup controller[%v]", err)

@@ -23,7 +23,7 @@ func setupSuite(tb testing.TB) (*ops.TestDeps, func(tb testing.TB)) {
 
 	err := ops.InitializeTestDB(ctx, deps)
 	if err != nil {
-		log.Fatalf("Cannot setup controller[%v]", err)
+		log.Fatalf("Failed to initialize test db[%v]", err)
 	}
 	return deps, func(tb testing.TB) {
 	}

@@ -15,7 +15,7 @@ services:
       POSTGRES_PASSWORD: example
 
   app:
-    image: golang
+    image: oplin
     volumes: 
       - .:/app
     ports:

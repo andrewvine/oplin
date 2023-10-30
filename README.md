@@ -12,13 +12,19 @@ Oplin is a simple service for collecting and viewing Metadata. It is similar to 
 git clone git@github.com:andrewvine/oplin.git
 ```
 
-2. Run the web server:
+2. Build the image:
+
+```
+docker build -t oplin .
+```
+
+3. Run the web server:
 
 ```
 docker compose up
 ```
 
-3. Run the tests:
+4. Run the tests:
 
 ```
 docker compose run app make test

@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"oplin/internal/env"
 	"os"
 	"strconv"
 
@@ -31,7 +30,6 @@ func buildDSN(host, user, dbname, password string, port int, sslmode string) str
 }
 
 func GetTestDB() *sql.DB {
-	env.Setup()
 	dsn := buildDSN("localhost", "test_oplin", "test_oplin", "topsecret", 5432, "disable")
 	DB, err := sql.Open("postgres", dsn)
 	if err != nil {
