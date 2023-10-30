@@ -1,3 +1,4 @@
+// Package projectpath provides the root folder of this project
 package projectpath
 
 import (

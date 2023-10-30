@@ -1,3 +1,4 @@
+// Package wiring provides the wiring for the lineage service
 package wiring
 
 import (
@@ -33,6 +34,7 @@ var dbPassword string
 var dbSslmode string
 var dbPort int
 
+// init parses the command line flags
 func init() {
 	flag.StringVar(&dbHost, "db_host", "", "the name of the host")
 	flag.StringVar(&dbName, "db_name", "", "the name of the database")
@@ -42,6 +44,7 @@ func init() {
 	flag.IntVar(&dbPort, "db_port", 0, "the database port")
 }
 
+// firstSet returns the first non-empty string in the slice of strings
 func firstSet(xs ...string) string {
 	for _, x := range xs {
 		if x != "" {
@@ -51,6 +54,7 @@ func firstSet(xs ...string) string {
 	return xs[len(xs)-1]
 }
 
+// buildDSN builds the data source name for the database
 func buildDSN() string {
 	portString := ""
 	if dbPort > 0 {
@@ -66,12 +70,14 @@ func buildDSN() string {
 		firstSet(dbSslmode, os.Getenv("OPLIN_DB_SSLMODE"), "disable"))
 }
 
+// NewGinEngine creates a new gin.Engine
 func NewGinEngine() *gin.Engine {
 	r := gin.Default()
 	r.Use(gin.CustomRecovery(ErrorHandler))
 	return r
 }
 
+// ErrorHandler handles errors
 func ErrorHandler(c *gin.Context, err any) {
 	e, ok := err.(error)
 	if !ok {
@@ -95,11 +101,13 @@ func bytesToString(b []byte) string {
 	return fmt.Sprintf("%s", b)
 }
 
+// SetupLineage sets up the lineage service
 func SetupLineage(r *gin.Engine) error {
 	dsn := buildDSN()
 	return setupLineage(r, dsn)
 }
 
+// SetupTestLineage sets up the lineage service for testing
 func SetupTestLineage(r *gin.Engine) error {
 	dsn := env.GetTestDSN()
 	return setupLineage(r, dsn)
@@ -123,6 +131,7 @@ func setupLineage(r *gin.Engine, dsn string) error {
 	return nil
 }
 
+// SetupRouter sets up the router for the lineage service
 func SetupRouter(r *gin.Engine,
 	deps Deps,
 ) {
