@@ -11,7 +11,6 @@ import (
 	"log"
 	"net/http"
 	"oplin/internal/lineage/api"
-	"oplin/internal/lineage/htmx"
 	"oplin/internal/lineage/htmx/datasets"
 	"oplin/internal/lineage/htmx/jobs"
 	"oplin/internal/lineage/htmx/requests"
@@ -147,8 +146,7 @@ func SetupRouter(r *gin.Engine,
 	templ := template.Must(template.New("").Funcs(r.FuncMap).ParseFS(resources.Templates, "templates/**/*.html"))
 	r.SetHTMLTemplate(templ)
 
-	// Home
-	r.GET("/index", htmx.MakeGetIndex())
+	listDatasets := datasets.MakeListDatasets(deps)
 
 	// Datasets
 	r.GET("/lineage/datasets/versions/fields", datasets.MakeGetDatasetVersionFields(deps))
@@ -159,7 +157,7 @@ func SetupRouter(r *gin.Engine,
 	r.GET("/lineage/datasets/:id/ownership", datasets.MakeGetDatasetOwnership(deps))
 	r.GET("/lineage/datasets/:id/quality", datasets.MakeGetDatasetQuality(deps))
 	r.GET("/lineage/datasets/:id/more", datasets.MakeGetDatasetMore(deps))
-	r.GET("/lineage/datasets", datasets.MakeListDatasets(deps))
+	r.GET("/lineage/datasets", listDatasets)
 
 	// Jobs
 	r.GET("/lineage/jobs/:id/runs", jobs.MakeGetJobRuns(deps))
@@ -173,4 +171,8 @@ func SetupRouter(r *gin.Engine,
 
 	// Runs
 	r.GET("/lineage/runs/:id", runs.MakeGetRun(deps))
+
+	// Home
+	r.GET("/index", listDatasets)
+	r.GET("/", listDatasets)
 }
