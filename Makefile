@@ -10,13 +10,13 @@ clean:
 	rm -rf build
 
 test:
-	go test ./...
+	go test -p 1 ./...
 
 run:
 	go run cmd/oplin/main.go
 
 test_coverage:
-	go test ./... -coverprofile=coverage.out
+	go test -p 1 ./... -coverprofile=coverage.out
 
 dep:
 	go mod download
