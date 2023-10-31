@@ -10,7 +10,6 @@ import (
 	"io/fs"
 	"log"
 	"net/http"
-	"oplin/internal/env"
 	"oplin/internal/lineage/api"
 	"oplin/internal/lineage/htmx"
 	"oplin/internal/lineage/htmx/datasets"
@@ -104,12 +103,6 @@ func bytesToString(b []byte) string {
 // SetupLineage sets up the lineage service
 func SetupLineage(r *gin.Engine) error {
 	dsn := buildDSN()
-	return setupLineage(r, dsn)
-}
-
-// SetupTestLineage sets up the lineage service for testing
-func SetupTestLineage(r *gin.Engine) error {
-	dsn := env.GetTestDSN()
 	return setupLineage(r, dsn)
 }
 
