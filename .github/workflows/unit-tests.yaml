@@ -1,0 +1,35 @@
+name: unit-tests
+on: push
+
+jobs:
+  # Label of the container job
+  container-job:
+    runs-on: ubuntu-latest
+    container: golang
+
+    services:
+      db:
+        image: postgres
+        volumes: 
+          - ./scripts/init.sql:/docker-entrypoint-initdb.d/1-init.sql
+          - /tmp/pgdata:/var/lib/postgresql/data
+        env:
+          POSTGRES_PASSWORD: example
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: make dep 
+
+      - name: Run tests
+        run: make tests
+        env:
+          OPLIN_TEST_DB_HOST: db
+
