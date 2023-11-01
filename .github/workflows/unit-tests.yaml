@@ -14,7 +14,7 @@ jobs:
           - ./scripts/init.sql:/docker-entrypoint-initdb.d/1-init.sql
           - /tmp/pgdata:/var/lib/postgresql/data
         env:
-          POSTGRES_PASSWORD: example
+          POSTGRES_PASSWORD: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -27,6 +27,13 @@ jobs:
 
       - name: Install dependencies
         run: make dep 
+
+      - name: Setup Test Database
+        run: make init-test-db
+        env:
+          OPLIN_TEST_DB_HOST: db
+          OPLIN_TEST_DB_PASSWORD: postgres
+          OPLIN_TEST_DB_USER: postgres
 
       - name: Run tests
         run: make tests

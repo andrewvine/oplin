@@ -12,6 +12,9 @@ clean:
 test:
 	go test -p 1 ./...
 
+init-test-db:
+	go run scripts/init.go
+
 run:
 	go run cmd/oplin/main.go
 
