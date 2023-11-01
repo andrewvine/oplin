@@ -34,7 +34,7 @@ jobs:
           OPLIN_TEST_DB_USER: postgres
 
       - name: Run tests
-        run: make tests
+        run: make test
         env:
           OPLIN_TEST_DB_HOST: db
 
