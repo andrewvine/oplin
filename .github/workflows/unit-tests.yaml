@@ -29,6 +29,7 @@ jobs:
         run: make init-test-db
         env:
           OPLIN_TEST_DB_HOST: db
+          OPLIN_TEST_DB_NAME: postgres
           OPLIN_TEST_DB_PASSWORD: postgres
           OPLIN_TEST_DB_USER: postgres
 
